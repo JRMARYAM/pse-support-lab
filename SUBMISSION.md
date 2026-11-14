@@ -199,7 +199,7 @@ Identify invoices stuck in Validated and check their submission status and ASP r
 
 - **Priority:** P2.
 - **Why:** A subset of invoices is rejected by the ASP and the customer has an active VAT audit. The issue affects financial compliance and invoice delivery, but the evidence does not indicate a complete service outage.
-- **SLA deadlines I am working to:** Received 10:15. First response by 11:15; proposed response 10:30. Next update 13:15. Resolution target within 8 hours, by 18:15.
+- **SLA deadlines I am working to:** Received 10:15. First response by 11:15; proposed response 10:30. Next update 13:15. Resolution target within 8 hours, by 08:15 on Tuesday 17 November.
 
 ### Investigation log
 
@@ -288,7 +288,7 @@ Do not resend the complete workbook. Reconcile the original production invoice s
 
 - **Priority:** P2.
 - **Why:** A batch of 40 invoices is affected and missing buyer delivery may affect the customer's payment run. The local replay demonstrates a specific rate-limit handling defect, although the original production requests still require verification.
-- **SLA deadlines I am working to:** Received 11:30. First response by 12:30; proposed response 11:45. Next update 14:30. Resolution target within 8 hours, by 19:30.
+- **SLA deadlines I am working to:** Received 11:30. First response by 12:30; proposed response 11:45. Next update 14:30. Resolution target within 8 hours, by 09:30 on Tuesday 17 November.
 
 ### Investigation log
 
