@@ -1,0 +1,46 @@
+asp-mock-1  | {"time":"2026-11-14T09:13:42.908690261Z","level":"INFO","msg":"document rejected","message_id":"3f0025e9-580d-4f9b-af0e-94ce260ba7e8","sender":"0235:1005362841","invoice_number":"ANF-2611-0044-HIYR","rule":"BR-CO-15","error":"Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 11817.57, expected 11817.59."}
+asp-mock-1  | {"time":"2026-11-14T09:13:42.915695534Z","level":"INFO","msg":"document accepted","message_id":"1c03cc6d-b8c5-4bc7-b14b-29c995e6cd66","sender":"0235:1005362841","receiver":"0235:1001526170","invoice_number":"ANF-2611-0041-HIYR"}
+asp-mock-1  | {"time":"2026-11-14T09:13:42.92005059Z","level":"INFO","msg":"document rejected","message_id":"18abb861-a6e5-4358-9ab1-fad29f357d2d","sender":"0235:1005362841","invoice_number":"ANF-2611-0042-HIYR","rule":"BR-CO-15","error":"Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 15022.42, expected 15022.43."}
+asp-mock-1  | {"time":"2026-11-14T09:13:42.927311951Z","level":"INFO","msg":"document accepted","message_id":"0dc940c4-04dc-4323-8a91-824e5de483a8","sender":"0235:1005362841","receiver":"0235:1001304958","invoice_number":"ANF-2611-0045-HIYR"}
+asp-mock-1  | {"time":"2026-11-14T09:13:42.93563626Z","level":"INFO","msg":"document rejected","message_id":"d95dd873-2090-471b-a438-4191dc6602d9","sender":"0235:1005362841","invoice_number":"ANF-2611-0046-HIYR","rule":"BR-CO-15","error":"Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 5610.99, expected 5611.00."}
+asp-mock-1  | {"time":"2026-11-14T09:13:42.940191475Z","level":"INFO","msg":"document accepted","message_id":"3425cedc-141c-4912-8a63-7aeb20444fe8","sender":"0235:1005362841","receiver":"0235:1001415069","invoice_number":"ANF-2611-0043-HIYR"}
+asp-mock-1  | {"time":"2026-11-14T09:16:40.989105772Z","level":"INFO","msg":"document accepted","message_id":"8ea629a3-6928-430d-9b8a-5570215f58c7","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-004-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:40.994370054Z","level":"INFO","msg":"document accepted","message_id":"d5849b0f-793d-493a-90cf-80653be9209e","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-001-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:40.996201236Z","level":"INFO","msg":"document accepted","message_id":"a2c73f6e-2f1e-45a9-b096-85bf4b0d893a","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-003-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:40.999546531Z","level":"INFO","msg":"document accepted","message_id":"3eec55cb-8a32-4308-bc92-cc21912df04e","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-002-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.002257747Z","level":"INFO","msg":"document accepted","message_id":"11ae66ba-f37a-444f-9595-ebaa49f793e5","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-005-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.005081792Z","level":"INFO","msg":"document accepted","message_id":"ea01f054-774c-4a5b-ab1a-bf91769441a0","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-006-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.005639644Z","level":"INFO","msg":"document accepted","message_id":"fd1e1276-73b8-41e0-9f00-a44583bb22ca","sender":"0235:1006453719","receiver":"0235:1001182736","invoice_number":"SMS-1116-007-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.010093696Z","level":"INFO","msg":"document accepted","message_id":"c6696fb0-29ff-4f04-97e8-141851df0c31","sender":"0235:1006453719","receiver":"0235:1001859403","invoice_number":"SMS-1116-008-HJ3F"}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.012112888Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.017452057Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.017588329Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.019165094Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.020719202Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.022174553Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.022707494Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.023453522Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.026794336Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.02723622Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.027724153Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.027846598Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.033867973Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.034900955Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.034993392Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.035880994Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.038495425Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.039786346Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.040342306Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.040922682Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.042679596Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.044343838Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.046053222Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.046906703Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.048526471Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.049807045Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.051009049Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.051039927Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.051972551Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.054243214Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.055588929Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}
+asp-mock-1  | {"time":"2026-11-14T09:16:41.055807161Z","level":"WARN","msg":"rate limit exceeded","sender":"0235:1006453719","retry_after_s":1}

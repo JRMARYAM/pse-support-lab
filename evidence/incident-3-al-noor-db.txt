@@ -1,0 +1,11 @@
+INCIDENT 3 - AL NOOR
+   invoice_number   |  status  | rejected_by |                                                                                                              errors                                                                                                              
+--------------------+----------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ ANF-2611-0041-HIYR | Accepted |             | []
+ ANF-2611-0042-HIYR | Rejected | asp         | [{"row": 0, "rule": "BR-CO-15", "field": "", "message": "Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 15022.42, expected 15022.43."}]
+ ANF-2611-0043-HIYR | Accepted |             | []
+ ANF-2611-0044-HIYR | Rejected | asp         | [{"row": 0, "rule": "BR-CO-15", "field": "", "message": "Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 11817.57, expected 11817.59."}]
+ ANF-2611-0045-HIYR | Accepted |             | []
+ ANF-2611-0046-HIYR | Rejected | asp         | [{"row": 0, "rule": "BR-CO-15", "field": "", "message": "Invoice total amount with VAT (IBT-112) must equal Invoice total amount without VAT (IBT-109) + Invoice total VAT amount (IBT-110). Got 5610.99, expected 5611.00."}]
+(6 rows)
+

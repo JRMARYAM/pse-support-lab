@@ -1,0 +1,45 @@
+INCIDENT 4 - SAHARA
+  invoice_number   |  status   |            asp_message_id            
+-------------------+-----------+--------------------------------------
+ SMS-1116-001-HJ3F | Accepted  | d5849b0f-793d-493a-90cf-80653be9209e
+ SMS-1116-002-HJ3F | Accepted  | 3eec55cb-8a32-4308-bc92-cc21912df04e
+ SMS-1116-003-HJ3F | Accepted  | a2c73f6e-2f1e-45a9-b096-85bf4b0d893a
+ SMS-1116-004-HJ3F | Accepted  | 8ea629a3-6928-430d-9b8a-5570215f58c7
+ SMS-1116-005-HJ3F | Accepted  | 11ae66ba-f37a-444f-9595-ebaa49f793e5
+ SMS-1116-006-HJ3F | Accepted  | ea01f054-774c-4a5b-ab1a-bf91769441a0
+ SMS-1116-007-HJ3F | Accepted  | fd1e1276-73b8-41e0-9f00-a44583bb22ca
+ SMS-1116-008-HJ3F | Accepted  | c6696fb0-29ff-4f04-97e8-141851df0c31
+ SMS-1116-009-HJ3F | Submitted | 
+ SMS-1116-010-HJ3F | Submitted | 
+ SMS-1116-011-HJ3F | Submitted | 
+ SMS-1116-012-HJ3F | Submitted | 
+ SMS-1116-013-HJ3F | Submitted | 
+ SMS-1116-014-HJ3F | Submitted | 
+ SMS-1116-015-HJ3F | Submitted | 
+ SMS-1116-016-HJ3F | Submitted | 
+ SMS-1116-017-HJ3F | Submitted | 
+ SMS-1116-018-HJ3F | Submitted | 
+ SMS-1116-019-HJ3F | Submitted | 
+ SMS-1116-020-HJ3F | Submitted | 
+ SMS-1116-021-HJ3F | Submitted | 
+ SMS-1116-022-HJ3F | Submitted | 
+ SMS-1116-023-HJ3F | Submitted | 
+ SMS-1116-024-HJ3F | Submitted | 
+ SMS-1116-025-HJ3F | Submitted | 
+ SMS-1116-026-HJ3F | Submitted | 
+ SMS-1116-027-HJ3F | Submitted | 
+ SMS-1116-028-HJ3F | Submitted | 
+ SMS-1116-029-HJ3F | Submitted | 
+ SMS-1116-030-HJ3F | Submitted | 
+ SMS-1116-031-HJ3F | Submitted | 
+ SMS-1116-032-HJ3F | Submitted | 
+ SMS-1116-033-HJ3F | Submitted | 
+ SMS-1116-034-HJ3F | Submitted | 
+ SMS-1116-035-HJ3F | Submitted | 
+ SMS-1116-036-HJ3F | Submitted | 
+ SMS-1116-037-HJ3F | Submitted | 
+ SMS-1116-038-HJ3F | Submitted | 
+ SMS-1116-039-HJ3F | Submitted | 
+ SMS-1116-040-HJ3F | Submitted | 
+(40 rows)
+

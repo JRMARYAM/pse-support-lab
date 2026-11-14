@@ -1,0 +1,154 @@
+INCIDENT 3 - PINT TOTAL CALCULATION
+   157	func computeTotals(lines []Line) ([]TaxSubtotal, Totals) {
+   158		byCategory := map[string]*TaxSubtotal{}
+   159		var net, vat, gross float64
+   160		for _, l := range lines {
+   161			s, ok := byCategory[l.VATCategory]
+   162			if !ok {
+   163				s = &TaxSubtotal{Category: l.VATCategory, Rate: l.VATRate}
+   164				byCategory[l.VATCategory] = s
+   165			}
+   166			s.TaxableAmount += l.NetAmount
+   167			s.TaxAmount += l.VATAmount
+   168	
+   169			net += l.NetAmount
+   170			vat += l.VATAmount
+   171			gross += l.Quantity * l.UnitPrice * (1 + l.VATRate/100)
+   172		}
+   173		subtotals := make([]TaxSubtotal, 0, len(byCategory))
+   174		for _, s := range byCategory {
+   175			s.TaxableAmount = round2(s.TaxableAmount)
+   176			s.TaxAmount = round2(s.TaxAmount)
+   177			subtotals = append(subtotals, *s)
+   178		}
+   179		sort.Slice(subtotals, func(i, j int) bool { return subtotals[i].Category < subtotals[j].Category })
+   180		return subtotals, Totals{
+   181			LineExtensionAmount: round2(net),
+   182			TaxExclusiveAmount:  round2(net),
+   183			TaxAmount:           round2(vat),
+   184			TaxInclusiveAmount:  round2(gross),
+   185			PayableAmount:       round2(gross),
+
+INCIDENT 4 - SUBMISSION WORKER
+   105	func (s *Submitter) submit(ctx context.Context, id string) {
+   106		inv, err := s.store.GetSubmission(ctx, id)
+   107		if err != nil {
+   108			s.log.Error("load invoice for submission", "invoice_id", id, "error", err)
+   109			return
+   110		}
+   111		if inv.Status != store.StatusValidated && inv.Status != store.StatusFailed {
+   112			return
+   113		}
+   114		if err := s.store.SetStatus(ctx, id, store.StatusSubmitted, "Sent to ASP"); err != nil {
+   115			s.log.Error("update status", "invoice_id", id, "error", err)
+   116			return
+   117		}
+   118	
+   119		start := time.Now()
+   120		resp, err := s.asp.Send(ctx, inv.SellerPeppolID, inv.Payload)
+   121		if err != nil {
+   122			s.log.Error("asp request failed", "invoice_id", id, "invoice_number", inv.InvoiceNumber, "error", err)
+   123			metrics.Submissions.WithLabelValues("failed").Inc()
+   124			_ = s.store.SetStatus(ctx, id, store.StatusFailed, "Could not reach ASP: "+err.Error())
+   125			return
+   126		}
+   127		s.log.Info("asp response", "invoice_id", id, "invoice_number", inv.InvoiceNumber,
+   128			"status_code", resp.StatusCode, "duration_ms", time.Since(start).Milliseconds())
+   129	
+   130		var reply aspReply
+   131		_ = json.Unmarshal(resp.Body, &reply)
+   132	
+   133		switch resp.StatusCode {
+   134		case http.StatusOK:
+   135			metrics.Submissions.WithLabelValues("accepted").Inc()
+   136			if err := s.store.MarkAccepted(ctx, id, reply.MessageID, resp.Body); err != nil {
+   137				s.log.Error("update status", "invoice_id", id, "error", err)
+   138			}
+   139		case http.StatusUnprocessableEntity:
+   140			metrics.Submissions.WithLabelValues("rejected").Inc()
+   141			detail := "Rejected by ASP"
+   142			if len(reply.Errors) > 0 {
+   143				detail = fmt.Sprintf("Rejected by ASP: %s %s", reply.Errors[0].Rule, reply.Errors[0].Message)
+   144			}
+   145			errs := make([]map[string]any, 0, len(reply.Errors))
+   146			for _, e := range reply.Errors {
+   147				errs = append(errs, map[string]any{"rule": e.Rule, "field": "", "message": e.Message, "row": 0})
+   148			}
+   149			if err := s.store.MarkRejected(ctx, id, "asp", errs, resp.Body, detail); err != nil {
+   150				s.log.Error("update status", "invoice_id", id, "error", err)
+   151			}
+   152		case http.StatusInternalServerError, http.StatusBadGateway, http.StatusServiceUnavailable, http.StatusGatewayTimeout:
+   153			metrics.Submissions.WithLabelValues("failed").Inc()
+   154			_ = s.store.SetStatus(ctx, id, store.StatusFailed, fmt.Sprintf("ASP returned HTTP %d", resp.StatusCode))
+   155		}
+
+INCIDENT 4 - ASP RATE LIMIT
+    32	const (
+    33		customizationID = "urn:peppol:pint:billing-1@ae-1"
+    34	
+    35		// Fair-use policy per sender: bursts of up to 8 documents, then 2 per second.
+    36		senderBurst      = 8
+    37		senderRatePerSec = 2.0
+   134	// allow reports whether the sender may send now; otherwise how long to wait.
+   135	func (l *limiter) allow(sender string, now time.Time) (bool, time.Duration) {
+   136		l.mu.Lock()
+   137		defer l.mu.Unlock()
+   138		b, ok := l.buckets[sender]
+   139		if !ok {
+   140			b = &bucket{tokens: senderBurst, last: now}
+   141			l.buckets[sender] = b
+   142		}
+   143		b.tokens = math.Min(senderBurst, b.tokens+now.Sub(b.last).Seconds()*senderRatePerSec)
+   144		b.last = now
+   145		if b.tokens >= 1 {
+   146			b.tokens--
+   147			return true, 0
+   148		}
+   149		wait := time.Duration((1 - b.tokens) / senderRatePerSec * float64(time.Second))
+   150		return false, wait
+   268	func (s *server) submit(w http.ResponseWriter, r *http.Request) {
+   269		sender := r.Header.Get("X-Sender-Id")
+   270		if sender == "" {
+   271			writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "missing X-Sender-Id header"})
+   272			return
+   273		}
+   274		if ok, wait := s.limiter.allow(sender, time.Now()); !ok {
+   275			retryAfter := int(math.Ceil(wait.Seconds()))
+   276			w.Header().Set("Retry-After", strconv.Itoa(retryAfter))
+   277			s.log.Warn("rate limit exceeded", "sender", sender, "retry_after_s", retryAfter)
+   278			documentsTotal.WithLabelValues("throttled").Inc()
+   279			writeJSON(w, http.StatusTooManyRequests, map[string]string{
+   280				"error":   "rate_limited",
+   281				"message": fmt.Sprintf("Too many documents from sender %s. Retry after %ds.", sender, retryAfter),
+   282			})
+   283			return
+
+INCIDENT 5 - PORTAL VALIDATION FLOW
+    98		ready := make([]string, 0, len(groups))
+    99		rejected := 0
+   100		for i, g := range groups {
+   101			errs := im.validator.Validate(ctx, validate.Seller{ID: seller.ID, TRN: seller.TRN}, id, g)
+   102			if len(errs) > 0 {
+   103				rejected++
+   104				if err := im.store.MarkRejected(ctx, records[i].ID, "portal", errs, nil,
+   105					"Failed portal validation: "+errs[0].Rule+" "+errs[0].Message); err != nil {
+   106					return store.Import{}, err
+   107				}
+   108				continue
+   109			}
+   110			if err := im.store.SetStatus(ctx, records[i].ID, store.StatusValidated, "Passed portal validation"); err != nil {
+   111				return store.Import{}, err
+   112			}
+   113			ready = append(ready, records[i].ID)
+   114		}
+   115	
+   116		elapsed := time.Since(start)
+   117		if err := im.store.FinishImport(ctx, id, store.ImportCompleted, "", elapsed); err != nil {
+   118			return store.Import{}, err
+   119		}
+   120		metrics.ImportsTotal.WithLabelValues("completed").Inc()
+   121		metrics.ImportDuration.Observe(elapsed.Seconds())
+   122		log.Info("import completed", "rows", len(wb.Rows), "invoices", len(groups),
+   123			"validated", len(ready), "rejected", rejected, "duration_ms", elapsed.Milliseconds())
+   124	
+   125		im.submitter.Enqueue(ready...)
